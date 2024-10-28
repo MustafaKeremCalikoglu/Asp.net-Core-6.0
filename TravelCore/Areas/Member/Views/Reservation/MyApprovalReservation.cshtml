@@ -1,0 +1,88 @@
+﻿@model List<Reservation>
+@{
+    ViewData["Title"] = "MyApprovalReservation";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rezervasyon Tablosu</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .table-custom {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+            .table-custom th {
+                background-color: #007bff;
+                color: #fff;
+                text-align: center;
+            }
+
+            .table-custom td {
+                text-align: center;
+            }
+
+            .table-custom tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            .table-custom tr:hover {
+                background-color: #e9ecef;
+            }
+
+            .table-custom .status-pending {
+                color: #ffc107;
+            }
+
+            .table-custom .status-approved {
+                color: #28a745;
+            }
+
+            .table-custom .status-canceled {
+                color: #dc3545;
+            }
+    </style>
+</head>
+<body>
+    <h1>Onay Bekleyen Rezervasyonlarım</h1>
+    @if (!Model.Any())
+    {
+        <h4 style="color:red"> Hiçbir Onay Bekleyen Rezervasyonunuz Bulunmamaktadır</h4>
+    }
+    else
+    {
+        <div class="container">
+            <h2 class="my-4">Rezervasyon Tablosu</h2>
+            <table class="table table-bordered table-custom">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Lokasyon</th>
+                        <th>Kişi Sayısı</th>
+                        <th>Rezervasyon Tarihi</th>
+                        <th>Durum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ReservationID</td>
+                            <td>@item.Destination.City</td>
+                            <td>@item.PersonCount</td>
+                            <td>@item.ReservationDate.ToString("dd.MM.yyyy")</td>
+                            <td class="status-@(item.Status.Replace(" ", "-").ToLower())">@item.Status</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</body>
+</html>

@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Index</h1>
+
+<a asp-area="Admin" asp-action="StaticPdfReport" asp-controller="Pdf" class="btn btn-outline-primary" > Static Pdf İndir </a>
+<br />
+<br />
+
+<a asp-area="Admin" asp-action="DynamicPdfReport" asp-controller="Pdf" class="btn btn-outline-Warning"> Dynamic Pdf İndir </a>
+
+
+
